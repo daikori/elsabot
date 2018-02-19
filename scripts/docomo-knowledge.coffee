@@ -22,11 +22,12 @@ module.exports = (robot) ->
   robot.respond /(?:(?:(?:、)?(?:教|おし)えて(?:、|。)?)|(?:teach me))\s*(.*)/, (res) ->
     message = res.match[1]
     return if message is ''
-    res
-      .http 'https://api.apigw.smt.docomo.ne.jp/knowledgeQA/v1/ask'
-      .query APIKEY: process.env.DOCOMO_API_KEY
-      .query q: message
-      .get() (err, response, body) ->
+    request = res
+      .http('https://api.apigw.smt.docomo.ne.jp/knowledgeQA/v1/ask')
+        .query(APIKEY: process.env.DOCOMO_API_KEY)
+        .query(q: message)
+        .get()
+    request (err, response, body) ->
         if err?
           res.send "Encountered an error #{err}"
         else
