@@ -19,7 +19,7 @@
 #   http://opensource.org/licenses/mit-license.php
 #
 module.exports = (robot) ->
-  robot.respond /(?:(?:(?:、)?(?:教|おし)えて(?:、|。)?)|(?:teach me))\s*(.*)/, (res) ->
+  robot.respond /(?:(?:(?:、)?(?:教|おし)えて(?:。)?)|(?:teach me))\s*(.*)/, (res) ->
     message = res.match[1]
     return if message is ''
     request = res
@@ -33,8 +33,8 @@ module.exports = (robot) ->
         else
           res.send JSON.parse(body).message.textForDisplay
           for key, answers of JSON.parse(body).answers
-            text = "     ☞ #{answers.answerText}"
-            text += " --- [#{answers.linkText}]" unless answers.linkText is null
-            text += "( #{answers.linkUrl} )" unless answers.linkUrl is null or answers.linkUrl is answers.answerText
+            text = "☞ #{answers.answerText}"
+            text += " [#{answers.linkText}]" unless answers.linkText is null
+            text += "(#{answers.linkUrl})" unless answers.linkUrl is null or answers.linkUrl is answers.answerText
             res.send text
     res.finish()
