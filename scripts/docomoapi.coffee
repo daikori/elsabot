@@ -12,7 +12,8 @@ getTimeDiffAsMinutes = (old_msec) ->
   return diff_minutes
 
 module.exports = (robot) ->
-  robot.respond /(\S+)/i, (msg) ->
+  robot.hear /(?:、)?\s*(.*)/, (msg) ->
+#  robot.respond /(\S+)/i, (msg) ->
 #  robot.hear /(エルサ)/i, (msg) ->
     DOCOMO_API_KEY = process.env.DOCOMO_API_KEY
     message = msg.match[1]
