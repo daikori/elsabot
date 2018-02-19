@@ -55,10 +55,10 @@ module.exports = (robot) ->
 
   robot.hear /(.*)/i, (msg) ->
     #
-    # @のついていない普通の会話に対して、10%の確率で返答する。
+    # @のついていない普通の会話に対して、30%の確率で返答する。
     #
     respond = Math.floor(Math.random() * 10) + 1
-    if respond == 10
+    if respond < 4
       DOCOMO_API_KEY = process.env.DOCOMO_API_KEY
       message = msg.match[1]
       return unless DOCOMO_API_KEY && message
